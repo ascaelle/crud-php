@@ -14,6 +14,8 @@ if (
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $create_at = new DateTime();
+
+
     $sql = 'INSERT INTO contacts(name, email, phone, address, create_at, admin_id) 
                         VALUES(:name, :email, :phone, :address, :create_at, :admin_id)';
     $statement = $connection->prepare($sql);
@@ -23,7 +25,7 @@ if (
         ':phone' => $phone,
         ':address' => $address,
         ':admin_id' => $_SESSION['admin_id'],
-        ':create_at' => $create_at->format('Y-m-d H:i:s')
+        ':create_at' => $create_at->format('Y-m-d H:i:s'),
     ])) {
         $message = 'Data inserted successfully';
     }
@@ -42,7 +44,8 @@ if (
                     <?= $message; ?>
                 </div>
             <?php endif; ?>
-            <form method="post">
+        
+            <form method="post" action="" enctype="multipart/form-data" class="mb-3">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control">
@@ -57,7 +60,7 @@ if (
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" name="address" id="address" class="form-control">
+                    <input type="text" name="address" id="address" required class="form-control">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-info">Add a contact</button>

@@ -5,7 +5,7 @@ if (empty($_SESSION['admin_id'])) {
     header("Location: /login.php");
 }
 
-$id = $_GET['id'];
+$id = intval($_GET['id']);
 $sql = 'SELECT * FROM contacts  WHERE id =:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
@@ -19,6 +19,7 @@ isset($_POST['create_at'])){
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $create_at = $_POST['create_at'];
+
     $sql = 'UPDATE contacts SET name=:name, email=:email, phone=:phone, address=:address, create_at=:create_at WHERE id=:id'; 
     $statement = $connection->prepare($sql);
     if ($statement->execute([':name' => $name, ':email' => $email, ':phone' => $phone, ':address' => $address, ':create_at' => $create_at, ':id' => $id])) 

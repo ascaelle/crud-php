@@ -22,25 +22,28 @@ $contacts = $statement->fetchAll(PDO::FETCH_OBJ);
             <table class="table table-bordered">
                 <tr>
                     <th>ID</th>
+                    <th>Photo</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Create_at</th>
-                    <th>admin_id</th>
                     <th>Action</th>
                 </tr>
                 <?php foreach ($contacts as $contact) : ?>
                     <tr>
                         <td><?= $contact->id; ?></td>
+                        <td>
+                            <img src="<?= $contact->image; ?>" class="img-circle" width="50" height="50">
+                        </td>
                         <td><?= $contact->name; ?></td>
                         <td><?= $contact->email; ?></td>
                         <td><?= $contact->phone; ?></td>
                         <td><?= $contact->address; ?></td>
                         <td><?= $contact->create_at; ?></td>
-                        <td><?= $contact->admin_id; ?></td>
                         <td>
                             <a href="edit.php?id=<?= $contact->id ?>" class="btn btn-info">Edit</a>
+                            <a href="profile.php?id=<?= $contact->id ?>" class="btn btn-primary">Profile</a>
                             <a onclick="return confirm('Are you sure you want to delete this entru? ')" href="delete.php?id=<?= $contact->id ?>" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
