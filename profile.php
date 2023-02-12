@@ -8,7 +8,7 @@ if (isset($_POST['upload'])) {
     $file_size = $_FILES['file']['size'];
     $file_type = $_FILES['file']['type'];
 
-    $location = "upload image/" . $file_name;
+    $location = "upload image/profile-" . $_GET['id'];
 
     if ($file_size < 52488000000) {
         if (move_uploaded_file($file_temp, $location)) {
